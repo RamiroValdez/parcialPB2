@@ -19,6 +19,7 @@ public class testTienda {
 	
 	@Test
 	public void queSePuedaAgregarStock() throws VendibleInexistenteException {
+		
 		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");
 		Producto producto = new Producto("1", "Producto nuevo", 100d);
 		Integer cantidad = 10;
@@ -116,6 +117,7 @@ public class testTienda {
 	
 	@Test
 	public void queSePuedaHacerUnaVentaDeUnProductosYServicios() throws VentaInexistenteException, VendibleInexistenteException, StockInsuficienteException {
+		
 		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");
 		String cuitCliente = "30123456780";
 		Cliente cliente = new Cliente(cuitCliente, "Cliente de ejemplo");
