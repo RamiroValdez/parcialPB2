@@ -37,6 +37,7 @@ public class Tienda {
 	
 	public void agregarProducto(Producto producto, Integer cantidad) {
 		// TODO Auto-generated method stub
+		
 		this.vendibles.add(producto);
 		
 		this.stock.put(producto, cantidad);
@@ -70,8 +71,13 @@ public class Tienda {
 		
 	}
 
-	public void agregarCliente(Cliente cliente) {
+	public void agregarCliente(Cliente cliente) throws YaExisteClienteException {
 		// TODO Auto-generated method stub
+		
+		if(clientes.contains(cliente)) {
+			throw new YaExisteClienteException();
+		}
+		
 		this.clientes.add(cliente);
 	}
 
@@ -128,6 +134,7 @@ public class Tienda {
 				
 				stock.put(producto, stockDescontado);
 				
+				
 			}else {
 				
 				throw new StockInsuficienteException();
@@ -152,6 +159,62 @@ public class Tienda {
 		}
 	}
 
+	public void establecerComisionVendedor(Vendedor vendedor, Integer comision) {
+		// TODO Auto-generated method stub
+		if(this.vendedores.contains(vendedor)) {
+			
+			for (Vendedor vend : vendedores) {
+				if(vend.equals(vendedor)) {
+					vend.setComision(comision);
+				}
+			}
+			
+		}
+	}
+
+	public Integer conocerComisionVendedor(Vendedor vendedor) {
+		// TODO Auto-generated method stub
+		if(this.vendedores.contains(vendedor)) {
+			for (Vendedor vend : vendedores) {
+				if(vend.equals(vendedor)) {
+					return vend.getComision();
+				}
+			}
+		}
+		
+		return null;
+	}
+
+	public void aplicarComision(Venta venta, Vendedor vendedor) {
+		
+		Double comisionADar = ((vendedor.getComision()*venta.getTotal())/100);
+		
+		vendedor.setMontoTotalPorComision(comisionADar);
+	}
+	public void aplicarTotalComisionVendedor(Vendedor vendedor) {
+		// TODO Auto-generated method stub
+		for (Venta venta : ventas) {
+			if(venta.getVendedor().equals(vendedor)) {
+				
+				aplicarComision(venta, vendedor);
+				
+			}
+		}
+	}
+
+	public Double obtenerTotalComisionVendedor(Vendedor vendedor) {
+		
+		if(this.vendedores.contains(vendedor)) {
+			
+			for (Vendedor v : vendedores) {
+				if(v.equals(vendedor)) {
+					return v.getMontoTotalPorComision();
+				}
+			}
+		}
+		
+		return null;
+	}
 
 
 }

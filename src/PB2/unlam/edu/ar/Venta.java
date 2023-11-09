@@ -44,6 +44,9 @@ public class Venta {
 		// TODO Auto-generated method stub
 		return this.totalGastado;
 	}
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
 	
 	
 }
